@@ -1,0 +1,37 @@
+body{
+    background-color: coral;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+#main-container{
+    background-color: darkolivegreen;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 90%;
+}
+
+#title-container{
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+}
+
+#tasks-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    background-color: cornsilk;
+    width: 100%;
+}
+
+.task {
+    background-color: cyan;
+    width: 90%;
+}
+
