@@ -17,7 +17,7 @@ const task = {
 function addTask() {
 
     //creates copy of task object
-    let taskCopy = Object.assign({}, task)
+    let taskCopy = Object.assign({}, task);
 
     //reads values from inputs
     let inputText = document.getElementById("task-entry-box").value;
@@ -35,7 +35,7 @@ function addTask() {
     if(taskCopy.position === 1)
     {
         document.getElementById("tasks-container").innerHTML = '';
-    }
+    };
     
     //Adds new task to page
     document.getElementById("tasks-container").innerHTML += `<div class="task">
@@ -45,6 +45,47 @@ function addTask() {
 </div>`;
 
 console.log(taskArr);
+
+    //checks checkboxes because everytime a task is added, all checkboxes get unchecked
+    checksCheckBoxes();
 };
+
+function checkTasks(){
+
+    //loop through checkboxes
+    for(let i = 0; i < taskArr.length; i++)
+    {
+
+        //checks if checkbox is checked
+        let isChecked = document.getElementById(`checkboxTask${taskArr[i].position}`).checked;
+        //alert(taskArr[i].text)
+
+        if(isChecked === true)
+        {
+            taskArr[i].finished = 1;
+            completedTaskArr.push(taskArr[i]);
+            document.getElementById('labelTask' + taskArr[i].position).innerHTML = `<s>${taskArr[i].text}</s>`;
+        }
+        else
+        {
+            taskArr[i].finished = 0; 
+            document.getElementById('labelTask' + taskArr[i].position).innerHTML = `${taskArr[i].text}`;
+        }
+
+    };      
+
+};
+
+function checksCheckBoxes()
+{
+    for(let i = 0; i < taskArr.length; i++)
+    {
+        if(taskArr[i].finished === 1)
+        {
+            document.getElementById(`checkboxTask${taskArr[i].position}`).checked = true;
+        }
+    }
+
+}
 
 
