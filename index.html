@@ -3,21 +3,29 @@
     <head>
         <link rel="stylesheet" type="text/css" href="/styles.css">
         <script src="/script.js"></script> 
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
+        </style> 
     </head>
     <body>
 
         <div id="main-container">
             <div id="title-container">
-                <h1>My To Do List</h1>
+                <h1>My To-Do List</h1>
             </div>
+            
 
             <div id="input-container">
-                <h3>Add a new task</h3>
+                <h3>add a new task</h3>
                 <div id="form-container">
                     <form name="add-task">
                         <input type="text" id="task-entry-box"/>
                     </form>
                     <button id="add-button" class="button-style" onclick="addTask()">Add</button>
+                </div>
+                <div id="additional-buttons-container">
+                    <button id="delete-button" class="button-style" onclick="deleteTasks()">Delete All Completed Tasks</button>
+                    <button id="clear-button" class="button-style" onclick="clearTasks()">Clear Task List</button>
                 </div>
             </div>
     

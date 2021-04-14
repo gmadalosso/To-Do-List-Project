@@ -39,10 +39,10 @@ function addTask() {
     
     //Adds new task to page
     document.getElementById("tasks-container").innerHTML += `<div class="task">
-    <p>${taskCopy.position}<p>
+    <p class="task-position">${taskCopy.position}<p>
     <input type="checkbox" id="${'checkboxTask' + taskCopy.position}" name="${'checkboxTask' + taskCopy.position}">
     <label for="${'task' + taskCopy.position}" id="${'labelTask' + taskCopy.position}">${taskCopy.text}</label>
-</div>`;
+    </div>`;
 
     //checks checkboxes because everytime a task is added, all checkboxes get unchecked
     checksCheckBoxes();
@@ -127,16 +127,26 @@ function rewritesList()
     for(let i = 0; i < taskArr.length; i++)
     {
         document.getElementById("tasks-container").innerHTML += `<div class="task">
-        <p>${taskArr[i].position}<p>
+        <p class="task-position">${taskArr[i].position}<p>
         <input type="checkbox" id="${'checkboxTask' + taskArr[i].position}" name="${'checkboxTask' + taskArr[i].position}">
         <label for="${'task' + taskArr[i].position}" id="${'labelTask' + taskArr[i].position}">${taskArr[i].text}</label>
-    </div>`;
+        </div>`;
     }
 
+    //rewrites "no tasks" message
     if(taskArr.length === 0)
     {
         document.getElementById("tasks-container").innerHTML = '<div class="task"><p>No tasks! Yay!</p></div>';
     }
+}
+
+function clearTasks()
+{
+    //clear all tasks from task array
+    taskArr = [];
+
+    document.getElementById("tasks-container").innerHTML = '<div class="task"><p>No tasks! Yay!</p></div>';
+
 }
 
 
