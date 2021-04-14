@@ -81,3 +81,25 @@ h3{
     text-align: center;
 }
 
+.button-style{
+    border: none;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+#add-button{
+    color: white;
+    background-color: #74C980;
+}
+
+#delete-button{
+    color: white;
+    background-color: #76b2b9;
+}
+
+#clear-button{
+    color: white;
+    background-color: #d69191;
+}

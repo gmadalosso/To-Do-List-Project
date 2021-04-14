@@ -38,7 +38,7 @@ function addTask() {
     };
     
     //Adds new task to page
-    document.getElementById("tasks-container").innerHTML += `<div class="task">
+    document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskCopy.position}" class="task">
     <p class="task-position">${taskCopy.position}<p>
     <input type="checkbox" id="${'checkboxTask' + taskCopy.position}" name="${'checkboxTask' + taskCopy.position}">
     <label for="${'task' + taskCopy.position}" id="${'labelTask' + taskCopy.position}">${taskCopy.text}</label>
@@ -67,11 +67,15 @@ function checkTasks(){
         {
             taskArr[i].finished = 1; //changes finished field in task object
             document.getElementById('labelTask' + taskArr[i].position).innerHTML = `<s>${taskArr[i].text}</s>`; //strikes task text
+            document.getElementById('task' + taskArr[i].position).getElementsByClassName("task-position")[0].style.backgroundColor = "#ACE2C6";
+            document.getElementById('labelTask' + taskArr[i].position).style.color = "#B9B9B9";
         }
         else //if checked = false, removes strike and changes task to unfinished
         {
             taskArr[i].finished = 0; 
             document.getElementById('labelTask' + taskArr[i].position).innerHTML = `${taskArr[i].text}`;
+            document.getElementById('task' + taskArr[i].position).getElementsByClassName("task-position")[0].style.backgroundColor = "#EEE2C7";
+            document.getElementById('labelTask' + taskArr[i].position).style.color = "#493A26";
         }
 
     };      
@@ -126,7 +130,7 @@ function rewritesList()
     //rewrites list
     for(let i = 0; i < taskArr.length; i++)
     {
-        document.getElementById("tasks-container").innerHTML += `<div class="task">
+        document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskArr[i].position}" class="task">
         <p class="task-position">${taskArr[i].position}<p>
         <input type="checkbox" id="${'checkboxTask' + taskArr[i].position}" name="${'checkboxTask' + taskArr[i].position}">
         <label for="${'task' + taskArr[i].position}" id="${'labelTask' + taskArr[i].position}">${taskArr[i].text}</label>
@@ -145,6 +149,7 @@ function clearTasks()
     //clear all tasks from task array
     taskArr = [];
 
+    //shows "no task" message again
     document.getElementById("tasks-container").innerHTML = '<div class="task"><p>No tasks! Yay!</p></div>';
 
 }
