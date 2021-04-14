@@ -44,10 +44,14 @@ function addTask() {
     <label for="${'task' + taskCopy.position}" id="${'labelTask' + taskCopy.position}">${taskCopy.text}</label>
 </div>`;
 
-console.log(taskArr);
-
     //checks checkboxes because everytime a task is added, all checkboxes get unchecked
     checksCheckBoxes();
+
+    //clears text input after adding task
+    document.getElementById("task-entry-box").value = '';
+
+    console.log(taskArr);
+
 };
 
 function checkTasks(){
@@ -58,15 +62,13 @@ function checkTasks(){
 
         //checks if checkbox is checked
         let isChecked = document.getElementById(`checkboxTask${taskArr[i].position}`).checked;
-        //alert(taskArr[i].text)
 
-        if(isChecked === true)
+        if(isChecked === true) 
         {
-            taskArr[i].finished = 1;
-            completedTaskArr.push(taskArr[i]);
-            document.getElementById('labelTask' + taskArr[i].position).innerHTML = `<s>${taskArr[i].text}</s>`;
+            taskArr[i].finished = 1; //changes finished field in task object
+            document.getElementById('labelTask' + taskArr[i].position).innerHTML = `<s>${taskArr[i].text}</s>`; //strikes task text
         }
-        else
+        else //if checked = false, removes strike and changes task to unfinished
         {
             taskArr[i].finished = 0; 
             document.getElementById('labelTask' + taskArr[i].position).innerHTML = `${taskArr[i].text}`;
@@ -78,6 +80,7 @@ function checkTasks(){
 
 function checksCheckBoxes()
 {
+    //loops through task array and checks checkboxes if task if finished
     for(let i = 0; i < taskArr.length; i++)
     {
         if(taskArr[i].finished === 1)
@@ -85,6 +88,40 @@ function checksCheckBoxes()
             document.getElementById(`checkboxTask${taskArr[i].position}`).checked = true;
         }
     }
+
+}
+
+function deleteTasks(){
+
+
+
+    console.log('Array at the beginning')
+    console.log('Array length: ' + taskArr.length);
+    console.log(taskArr);
+
+    //loop through task array to remove finished arrays
+    for(let i = 0; i < taskArr.length; i++)
+    {
+        //checks if task is finished
+        let isFinished = taskArr[i].finished;
+
+        //removes task from task array
+        if(isFinished === 1)
+        {
+            taskArr.splice(i, 1);
+            i--;
+        };
+       
+    }
+
+    //loop through task array to adjust position
+    for(let i = 0; i < taskArr.length; i++)
+    {
+        taskArr[i].position = i + 1;
+    };
+
+    console.log('Array at the end');
+    console.log(taskArr);
 
 }
 
