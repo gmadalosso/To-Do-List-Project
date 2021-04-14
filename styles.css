@@ -94,12 +94,24 @@ h3{
     background-color: #74C980;
 }
 
+#add-button:hover{
+    background-color: #97d39e;
+}
+
 #delete-button{
     color: white;
     background-color: #76b2b9;
 }
 
+#delete-button:hover{
+    background-color: #8bc6cc;
+}
+
 #clear-button{
     color: white;
     background-color: #d69191;
+}
+
+#clear-button:hover{
+    background-color: #dda6a6;
 }
