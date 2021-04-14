@@ -16,6 +16,7 @@ const task = {
 //Add Button Function
 function addTask() {
 
+    //creates copy of task object
     let taskCopy = Object.assign({}, task)
 
     //reads values from inputs
