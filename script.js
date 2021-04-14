@@ -1,6 +1,9 @@
 //Task Array
 let taskArr = [];
 
+//Completed Task Array
+completedTaskArr = [];
+
 //Task object
 const task = {
     position: 0,
@@ -8,34 +11,39 @@ const task = {
     finished: 0,
 };
 
-
 //BUTTON EVENTS
 
-//Add Button
+//Add Button Function
 function addTask() {
+
+    let taskCopy = Object.assign({}, task)
+
     //reads values from inputs
     let inputText = document.getElementById("task-entry-box").value;
     let taskPosition = taskArr.length + 1;
 
     //assign task object the values
-    task.position = taskPosition;
-    task.text = inputText;
-    task.finished = 0; //new task unfinished by default
+    taskCopy.position = taskPosition;
+    taskCopy.text = inputText;
+    taskCopy.finished = 0; //new task unfinished by default
 
     //includes new task in task array
-    taskArr.push(task);
+    taskArr.push(taskCopy);
 
-    //lists elements in task array
-    var i;
-    for (i = 0; i < taskArr.length; i++) {
-        //console.log(taskArr[i]);
+    //Deletes 'no tasks' message when adding first task
+    if(taskCopy.position === 1)
+    {
+        document.getElementById("tasks-container").innerHTML = '';
     }
-
-    //Adds task to page
+    
+    //Adds new task to page
     document.getElementById("tasks-container").innerHTML += `<div class="task">
-    <p>${task.position}<p>
-    <input type="checkbox" id="task" name="${'task' + task.position}" value="completed">
-    <label for="${'task' + task.position}">${task.text}</label>
+    <p>${taskCopy.position}<p>
+    <input type="checkbox" id="${'checkboxTask' + taskCopy.position}" name="${'checkboxTask' + taskCopy.position}">
+    <label for="${'task' + taskCopy.position}" id="${'labelTask' + taskCopy.position}">${taskCopy.text}</label>
 </div>`;
 
+console.log(taskArr);
 };
+
+

@@ -21,6 +21,22 @@ body{
     background-color: white;
 }
 
+#input-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+#form-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
 #tasks-container{
     display: flex;
     flex-direction: column;
@@ -32,6 +48,12 @@ body{
 
 .task {
     background-color: cyan;
+    display: flex;
+    flex-direction: row;
     width: 90%;
+}
+
+h3{
+    text-align: center;
 }
 
