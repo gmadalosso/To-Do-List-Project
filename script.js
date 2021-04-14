@@ -93,12 +93,6 @@ function checksCheckBoxes()
 
 function deleteTasks(){
 
-
-
-    console.log('Array at the beginning')
-    console.log('Array length: ' + taskArr.length);
-    console.log(taskArr);
-
     //loop through task array to remove finished arrays
     for(let i = 0; i < taskArr.length; i++)
     {
@@ -120,9 +114,29 @@ function deleteTasks(){
         taskArr[i].position = i + 1;
     };
 
-    console.log('Array at the end');
-    console.log(taskArr);
+    //rewrites list with new positions and only unfinished tasks
+    rewritesList();
+}
 
+function rewritesList()
+{
+    //cleans list 
+    document.getElementById("tasks-container").innerHTML = '';
+
+    //rewrites list
+    for(let i = 0; i < taskArr.length; i++)
+    {
+        document.getElementById("tasks-container").innerHTML += `<div class="task">
+        <p>${taskArr[i].position}<p>
+        <input type="checkbox" id="${'checkboxTask' + taskArr[i].position}" name="${'checkboxTask' + taskArr[i].position}">
+        <label for="${'task' + taskArr[i].position}" id="${'labelTask' + taskArr[i].position}">${taskArr[i].text}</label>
+    </div>`;
+    }
+
+    if(taskArr.length === 0)
+    {
+        document.getElementById("tasks-container").innerHTML = '<div class="task"><p>No tasks! Yay!</p></div>';
+    }
 }
 
 
