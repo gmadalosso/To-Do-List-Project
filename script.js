@@ -1,9 +1,6 @@
 //Task Array
 let taskArr = [];
 
-//Completed Task Array
-completedTaskArr = [];
-
 //Task object
 const task = {
     position: 0,
@@ -23,34 +20,40 @@ function addTask() {
     let inputText = document.getElementById("task-entry-box").value;
     let taskPosition = taskArr.length + 1;
 
-    //assign task object the values
-    taskCopy.position = taskPosition;
-    taskCopy.text = inputText;
-    taskCopy.finished = 0; //new task unfinished by default
-
-    //includes new task in task array
-    taskArr.push(taskCopy);
-
-    //Deletes 'no tasks' message when adding first task
-    if(taskCopy.position === 1)
+    if(inputText === '')
     {
-        document.getElementById("tasks-container").innerHTML = '';
-    };
-    
-    //Adds new task to page
-    document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskCopy.position}" class="task">
-    <p class="task-position">${taskCopy.position}<p>
-    <input type="checkbox" id="${'checkboxTask' + taskCopy.position}" name="${'checkboxTask' + taskCopy.position}">
-    <label for="${'task' + taskCopy.position}" id="${'labelTask' + taskCopy.position}">${taskCopy.text}</label>
-    </div>`;
+        alert('Please, write something!'); //shows message if text input is empty
+    }
+    else 
+    {
+        //assign task object the values
+        taskCopy.position = taskPosition;
+        taskCopy.text = inputText;
+        taskCopy.finished = 0; //new task unfinished by default
 
-    //checks checkboxes because everytime a task is added, all checkboxes get unchecked
-    checksCheckBoxes();
+        //includes new task in task array
+        taskArr.push(taskCopy);
 
-    //clears text input after adding task
-    document.getElementById("task-entry-box").value = '';
+        //Deletes 'no tasks' message when adding first task
+        if(taskCopy.position === 1)
+        {
+            document.getElementById("tasks-container").innerHTML = '';
+        };
+        
+        //Adds new task to page
+        document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskCopy.position}" class="task">
+        <p class="task-position">${taskCopy.position}<p>
+        <input type="checkbox" id="${'checkboxTask' + taskCopy.position}" name="${'checkboxTask' + taskCopy.position}">
+        <label for="${'task' + taskCopy.position}" id="${'labelTask' + taskCopy.position}">${taskCopy.text}</label>
+        </div>`;
 
-    console.log(taskArr);
+        //checks checkboxes because everytime a task is added, all checkboxes get unchecked
+        checksCheckBoxes();
+
+        //clears text input after adding task
+        document.getElementById("task-entry-box").value = '';
+    }
+
 
 };
 
