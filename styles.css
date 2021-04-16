@@ -115,3 +115,14 @@ h3{
 #clear-button:hover{
     background-color: #dda6a6;
 }
+
+footer{
+    text-align: center;
+    margin: 1rem 0;
+}
+
+a{
+    text-decoration: none;
+    color: #493A26;
+}
+
