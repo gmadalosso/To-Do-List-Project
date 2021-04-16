@@ -13,12 +13,13 @@ const task = {
 //Add Button Function
 function addTask() {
 
-    //creates copy of task object
+    //creates copy of task objectgit pull -r upstream master
     let taskCopy = Object.assign({}, task);
 
     //reads values from inputs
     let inputText = document.getElementById("task-entry-box").value;
     let taskPosition = taskArr.length + 1;
+    let i = taskArr.length;
 
     if(inputText === '')
     {
@@ -40,12 +41,8 @@ function addTask() {
             document.getElementById("tasks-container").innerHTML = '';
         };
         
-        //Adds new task to page
-        document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskCopy.position}" class="task">
-        <p class="task-position">${taskCopy.position}<p>
-        <input type="checkbox" id="${'checkboxTask' + taskCopy.position}" name="${'checkboxTask' + taskCopy.position}">
-        <label for="${'task' + taskCopy.position}" id="${'labelTask' + taskCopy.position}">${taskCopy.text}</label>
-        </div>`;
+        //adds task to page
+        addTaskToPage(i);
 
         //checks checkboxes because everytime a task is added, all checkboxes get unchecked
         checksCheckBoxes();
@@ -133,11 +130,7 @@ function rewritesList()
     //rewrites list
     for(let i = 0; i < taskArr.length; i++)
     {
-        document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskArr[i].position}" class="task">
-        <p class="task-position">${taskArr[i].position}<p>
-        <input type="checkbox" id="${'checkboxTask' + taskArr[i].position}" name="${'checkboxTask' + taskArr[i].position}">
-        <label for="${'task' + taskArr[i].position}" id="${'labelTask' + taskArr[i].position}">${taskArr[i].text}</label>
-        </div>`;
+        addTaskToPage(i);
     }
 
     //rewrites "no tasks" message
@@ -156,5 +149,14 @@ function clearTasks()
     document.getElementById("tasks-container").innerHTML = '<div class="task"><p>No tasks! Yay!</p></div>';
 
 }
+
+function addTaskToPage(i)
+{
+    document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskArr[i].position}" class="task">
+    <p class="task-position">${taskArr[i].position}<p>
+    <input type="checkbox" id="${'checkboxTask' + taskArr[i].position}" name="${'checkboxTask' + taskArr[i].position}">
+    <label for="${'task' + taskArr[i].position}" id="${'labelTask' + taskArr[i].position}">${taskArr[i].text}</label>
+    </div>`;
+};
 
 
