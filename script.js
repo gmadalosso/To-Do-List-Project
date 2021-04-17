@@ -222,5 +222,63 @@ function deleteTask(event)
     rewritesList();
 }
 
+//moves task one position up in the task list
+function upTask(event){
+
+    //gets button id
+    let id = event.target.id;
+
+    //gets task position from button id
+    let taskPosition = id.substr(id.length - 1); 
+
+    //switches positions of current task and task above
+    taskAbove = taskArr[taskPosition-2];
+    taskCurr = taskArr[taskPosition-1];
+
+    taskArr[taskPosition-2] = taskCurr;
+    taskArr[taskPosition-1] = taskAbove;
+
+    //loop through task array to adjust position
+    for(let i = 0; i < taskArr.length; i++)
+    {
+        taskArr[i].position = i + 1;
+    };
+
+    //rewrites task list
+    rewritesList();
+
+    //rechecks boxes
+    checksCheckBoxes();
+}
+
+//moves task one position up in the task list
+function downTask(event){
+
+    //gets button id
+    let id = event.target.id;
+
+    //gets task position from button id
+    let taskPosition = id.substr(id.length - 1); 
+
+    //switches positions of current task and task below
+    taskBelow = taskArr[taskPosition];
+    taskCurr = taskArr[taskPosition-1];
+
+    taskArr[taskPosition] = taskCurr;
+    taskArr[taskPosition-1] = taskBelow;
+
+    //loop through task array to adjust position
+    for(let i = 0; i < taskArr.length; i++)
+    {
+        taskArr[i].position = i + 1;
+    };
+
+    //rewrites task list
+    rewritesList();
+
+    //rechecks boxes
+    checksCheckBoxes();
+}
+
 
 
