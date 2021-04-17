@@ -1,3 +1,5 @@
+/*--- ARRAYS AND OBJECTS ---*/
+
 //Task Array
 let taskArr = [];
 
@@ -8,12 +10,13 @@ const task = {
     finished: 0,
 };
 
-//BUTTON EVENTS
+/*--- FUNCTIONS ---*/
 
 //Add Button Function
+//Adds a new task to the task array and list on the page
 function addTask() {
 
-    //creates copy of task objectgit pull -r upstream master
+    //creates copy of task object
     let taskCopy = Object.assign({}, task);
 
     //reads values from inputs
@@ -49,11 +52,12 @@ function addTask() {
 
         //clears text input after adding task
         document.getElementById("task-entry-box").value = '';
-    }
+    };
 
 
 };
 
+//changes style of task once its checkbox is check or unchecked
 function checkTasks(){
 
     //loop through checkboxes
@@ -82,6 +86,7 @@ function checkTasks(){
 
 };
 
+//rechecks checkboxes based on finished property of task object in the task array
 function checksCheckBoxes()
 {
     //loops through task array and checks checkboxes if task if finished
@@ -90,11 +95,12 @@ function checksCheckBoxes()
         if(taskArr[i].finished === 1)
         {
             document.getElementById(`checkboxTask${taskArr[i].position}`).checked = true;
-        }
-    }
+        };
+    };
 
-}
+};
 
+//deletes all tasks marked as finished
 function deleteTasks(){
 
     //loop through task array to remove finished arrays
@@ -110,7 +116,7 @@ function deleteTasks(){
             i--;
         };
        
-    }
+    };
 
     //loop through task array to adjust position
     for(let i = 0; i < taskArr.length; i++)
@@ -120,8 +126,9 @@ function deleteTasks(){
 
     //rewrites list with new positions and only unfinished tasks
     rewritesList();
-}
+};
 
+//rewrites entire task list using task array
 function rewritesList()
 {
     //cleans list 
@@ -131,15 +138,16 @@ function rewritesList()
     for(let i = 0; i < taskArr.length; i++)
     {
         addTaskToPage(i);
-    }
+    };
 
     //rewrites "no tasks" message
     if(taskArr.length === 0)
     {
         document.getElementById("tasks-container").innerHTML = '<div class="task"><p>No tasks! Yay!</p></div>';
-    }
-}
+    };
+};
 
+//clear task array and task list on the page
 function clearTasks()
 {
     //clear all tasks from task array
@@ -148,15 +156,71 @@ function clearTasks()
     //shows "no task" message again
     document.getElementById("tasks-container").innerHTML = '<div class="task"><p>No tasks! Yay!</p></div>';
 
-}
+};
 
+//adds necessary HTML code to the page to show new task on the list (task position = i)
 function addTaskToPage(i)
 {
-    document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskArr[i].position}" class="task">
+    document.getElementById("tasks-container").innerHTML += `<div id="${'task' + taskArr[i].position}" class="task" onmouseenter="showOptions(event)" onmouseleave="hideOptions(event)">
     <p class="task-position">${taskArr[i].position}<p>
     <input type="checkbox" id="${'checkboxTask' + taskArr[i].position}" name="${'checkboxTask' + taskArr[i].position}">
     <label for="${'task' + taskArr[i].position}" id="${'labelTask' + taskArr[i].position}">${taskArr[i].text}</label>
+    <button id="${'up-button' + taskArr[i].position}" class="up-button button-style" onclick="upTask(event)">Up</button>
+    <button id="${'down-button' + taskArr[i].position}" class="down-button button-style" onclick="downTask(event)">Down</button>
+    <button id="${'edit-button' + taskArr[i].position}" class="edit-button button-style" onclick="editTask(event)">Edit</button>
+    <button id="${'delete-task-button' + taskArr[i].position}" class="delete-task-button button-style" onclick="deleteTask(event)">Delete</button>
     </div>`;
 };
+
+//show options for task when hover over it
+function showOptions(event){
+
+    //doesn't show "up" options if it's the first task on the list
+    if(event.target.id != 'task1')
+    {
+        document.getElementById(event.target.id).getElementsByClassName("up-button")[0].style.display = "inline-block";
+    };
+
+    //doesn't show "down" options if it's the last task on the list
+    if(event.target.id != 'task' + (taskArr.length))
+    {
+        document.getElementById(event.target.id).getElementsByClassName("down-button")[0].style.display = "inline-block";
+    };
+    
+    document.getElementById(event.target.id).getElementsByClassName("edit-button")[0].style.display = "inline-block";
+    document.getElementById(event.target.id).getElementsByClassName("delete-task-button")[0].style.display = "inline-block";
+};
+
+//hide options for task when mouse moves away
+function hideOptions(event)
+{
+    document.getElementById(event.target.id).getElementsByClassName("up-button")[0].style.display = "none";
+    document.getElementById(event.target.id).getElementsByClassName("down-button")[0].style.display = "none";
+    document.getElementById(event.target.id).getElementsByClassName("edit-button")[0].style.display = "none";
+    document.getElementById(event.target.id).getElementsByClassName("delete-task-button")[0].style.display = "none";
+};
+
+//deletes task when delete button clicked
+function deleteTask(event)
+{
+    //gets button id
+    let id = event.target.id;
+
+    //gets task position from button id
+    let taskPosition = id.substr(id.length - 1); 
+
+    //removes task from task array
+    taskArr.splice(taskPosition - 1, 1); 
+
+    //loop through task array to adjust position
+    for(let i = 0; i < taskArr.length; i++)
+    {
+        taskArr[i].position = i + 1;
+    };
+
+    //rewrites task list
+    rewritesList();
+}
+
 
 

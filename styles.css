@@ -126,3 +126,10 @@ a{
     color: #493A26;
 }
 
+.up-button, .down-button, .edit-button, .delete-task-button{
+    display: none;
+    margin: 0;
+    padding: 0.2rem 0.2rem;
+    background-color: rgb(206, 206, 206);
+}
+
