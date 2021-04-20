@@ -1,3 +1,6 @@
+/*-- GLOBAL VARIABLES --*/
+var idGlobal = ''; //variable used in the okEdit() function to identify the task being edited
+
 /*--- ARRAYS AND OBJECTS ---*/
 
 //Task Array
@@ -165,10 +168,10 @@ function addTaskToPage(i)
     <p class="task-position">${taskArr[i].position}<p>
     <input type="checkbox" id="${'checkboxTask' + taskArr[i].position}" name="${'checkboxTask' + taskArr[i].position}">
     <label for="${'task' + taskArr[i].position}" id="${'labelTask' + taskArr[i].position}">${taskArr[i].text}</label>
-    <button id="${'up-button' + taskArr[i].position}" class="up-button button-style" onclick="upTask(event)">Up</button>
-    <button id="${'down-button' + taskArr[i].position}" class="down-button button-style" onclick="downTask(event)">Down</button>
-    <button id="${'edit-button' + taskArr[i].position}" class="edit-button button-style" onclick="editTask(event)">Edit</button>
-    <button id="${'delete-task-button' + taskArr[i].position}" class="delete-task-button button-style" onclick="deleteTask(event)">Delete</button>
+    <button id="${'up-button' + taskArr[i].position}" class="up-button button-style" onclick="upTask(event)">&#9650;</button>
+    <button id="${'down-button' + taskArr[i].position}" class="down-button button-style" onclick="downTask(event)">&#9660;</button>
+    <button id="${'edit-button' + taskArr[i].position}" class="edit-button button-style" onclick="editTask(event)">&#x270e;</button>
+    <button id="${'delete-task-button' + taskArr[i].position}" class="delete-task-button button-style" onclick="deleteTask(event)">&times;</button>
     </div>`;
 };
 
@@ -280,5 +283,65 @@ function downTask(event){
     checksCheckBoxes();
 }
 
+//Shows edit task box and allow user to edit task text
+function editTask(event){
 
+    //gets button id
+    let id = event.target.id;
+    idGlobal = id;
+
+    //gets task position from button id
+    let taskPosition = id.substr(id.length - 1); 
+
+    document.getElementById("edit-box-title").innerHTML = "Editting task #" + taskPosition;
+
+    //Puts current task text on edit text input
+    document.getElementById("edit-task-entry-box").value = taskArr[taskPosition-1].text;
+
+    //shows edit task box
+    document.getElementById("edit-box-bg").style.display = "block"; 
+
+}
+
+//Closes edit box when pressing the X button on the right of box
+function closeEditBox()
+{
+    //disable edit box display
+    document.getElementById("edit-box-bg").style.display = "none";
+}
+
+//Changes task text when OK button is pressed
+function okEdit(){
+
+    if(document.getElementById("edit-task-entry-box").value === '')
+    {
+        alert('Please, write something!'); //shows message if text input is empty
+    }
+    else
+    {
+        //gets button id
+        let id = idGlobal;
+
+        //gets task position from button id
+        let taskPosition = id.substr(id.length - 1); 
+
+        //changes task text propert to new text
+        taskArr[taskPosition-1].text = document.getElementById("edit-task-entry-box").value;
+
+        //rewrites task list
+        rewritesList();
+
+        //rechecks boxes
+        checksCheckBoxes();
+
+        closeEditBox();
+    };
+
+}
+
+//Closes edit box when CANCEL button is pressed and doesn't change the task
+function cancelEdit(){
+    //close edit box
+    closeEditBox();
+}
 
