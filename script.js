@@ -210,7 +210,7 @@ function deleteTask(event)
     let id = event.target.id;
 
     //gets task position from button id
-    let taskPosition = id.substr(id.length - 1); 
+    let taskPosition = id.replace(/\D/g,'');
 
     //removes task from task array
     taskArr.splice(taskPosition - 1, 1); 
@@ -232,7 +232,7 @@ function upTask(event){
     let id = event.target.id;
 
     //gets task position from button id
-    let taskPosition = id.substr(id.length - 1); 
+    let taskPosition = id.replace(/\D/g,'');
 
     //switches positions of current task and task above
     taskAbove = taskArr[taskPosition-2];
@@ -261,7 +261,7 @@ function downTask(event){
     let id = event.target.id;
 
     //gets task position from button id
-    let taskPosition = id.substr(id.length - 1); 
+    let taskPosition = id.replace(/\D/g,'');
 
     //switches positions of current task and task below
     taskBelow = taskArr[taskPosition];
@@ -291,7 +291,9 @@ function editTask(event){
     idGlobal = id;
 
     //gets task position from button id
-    let taskPosition = id.substr(id.length - 1); 
+    let taskPosition = id.replace(/\D/g,'');
+
+    alert(taskPosition);
 
     document.getElementById("edit-box-title").innerHTML = "Editting task #" + taskPosition;
 
