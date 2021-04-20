@@ -293,8 +293,6 @@ function editTask(event){
     //gets task position from button id
     let taskPosition = id.replace(/\D/g,'');
 
-    alert(taskPosition);
-
     document.getElementById("edit-box-title").innerHTML = "Editting task #" + taskPosition;
 
     //Puts current task text on edit text input
