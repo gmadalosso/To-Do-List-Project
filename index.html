@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>     
+        <title>My To-Do List</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="/styles.css">
         <script src="/script.js"></script> 
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
         </style> 
     </head>
+
     <body>
+
+        <div id="edit-box-bg">
+
+            <div id="edit-box">
+                <span id="edit-box-close" onclick="closeEditBox()">&times;</span>
+                <h3 id="edit-box-title">TITLE</h3>
+                <form name="edit-task">
+                    <input type="text" id="edit-task-entry-box"/>
+                </form>
+                <button id="ok-edit-button" class="button-style" onmousedown="okEdit()">Ok</button>
+                <button id="cancel-edit-button" class="button-style" onmousedown="cancelEdit()">Cancel</button>
+            </div>
+
+        </div>
 
         <div id="main-container">
             <div id="title-container">
