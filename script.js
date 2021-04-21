@@ -89,6 +89,30 @@ function checkTasks(){
 
 };
 
+//Same as checkTasks() but uses the finished property to change the style (necessary in the editTask() funtion)
+function ChangeStyle()
+{
+    //loop through tasks to change style in finished tasks
+    for(let i = 0; i < taskArr.length; i++)
+    {
+    
+        if(taskArr[i].finished === 1) 
+        {
+            document.getElementById('labelTask' + taskArr[i].position).innerHTML = `<s>${taskArr[i].text}</s>`; //strikes task text
+            document.getElementById('task' + taskArr[i].position).getElementsByClassName("task-position")[0].style.backgroundColor = "#ACE2C6";
+            document.getElementById('labelTask' + taskArr[i].position).style.color = "#B9B9B9";
+        }
+        else //if checked = false, removes strike and changes task to unfinished
+        {
+            document.getElementById('labelTask' + taskArr[i].position).innerHTML = `${taskArr[i].text}`;
+            document.getElementById('task' + taskArr[i].position).getElementsByClassName("task-position")[0].style.backgroundColor = "#EEE2C7";
+            document.getElementById('labelTask' + taskArr[i].position).style.color = "#493A26";
+        }
+    
+    }; 
+
+};
+
 //rechecks checkboxes based on finished property of task object in the task array
 function checksCheckBoxes()
 {
@@ -334,6 +358,10 @@ function okEdit(){
         //rechecks boxes
         checksCheckBoxes();
 
+        //rechanges the style of completed tasks
+        ChangeStyle();
+
+        //closes edit box
         closeEditBox();
     };
 
